@@ -22,11 +22,9 @@ class UpscaleTest {
     Karate testUpscale() {
 
 
-        // mvn clean test -DargLine='-Dkarate.env=docker' -Dtest=WebRunner
-        // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
-
+        // mvn clean test -Dkarate.options="--tags @github" -Dtest=\!UpscaleTest#runThruTutorial 
+        // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @DownloadPWA"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
         // docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
-
         // mvn test -DargLine='-Dkarate.env=docker'  -Dtest=\!UpscaleTest#runThruTutorial -Dkarate.options="--tags @login"
         // Good examples at https://github.com/karatelabs/karate/blob/master/karate-demo/src/test/java/driver/core/test-01.feature
         return Karate.run("upscale").relativeTo(getClass());

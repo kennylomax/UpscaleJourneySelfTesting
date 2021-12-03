@@ -151,29 +151,27 @@ To verify:
 See Docs at https://github.com/karatelabs/karate/wiki/Docker
 ```
 
+git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
+cd UpscaleJourneySelfTesting
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
+
+cd UpscaleJourneySelfTesting
 open vnc://localhost:5900
- mkdir scratch
- cd scratch
- cp ~/upscaleenv.sh  .
+cp ~/upscaleenv.sh  src
+mkdir journey
+cd journey
+docker exec -it -w /src karate bash
+source src/upscaleenv.sh 
+
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @github"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @downloadPWA"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
   - export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
   - export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey should occur
 
- git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
-
- docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
  
-
- cd UpscaleJourneySelfTesting
- mvn clean
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
 
- docker exec -it -w /src karate bash
- git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
- source src/upscaleenv.sh
- cd UpscaleJourneySelfTesting
- mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
 docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 ```

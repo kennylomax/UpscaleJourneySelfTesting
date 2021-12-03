@@ -11,13 +11,15 @@ function fn() {
         NOW: java.lang.System.getenv('NOW')  
       }
     if (karate.env === 'docker') {
+        config.MY_DOWNLOAD_FOLDER = "/home/chrome/Downloads";
+        config.MY_HOME_DIRECTORY="/src/journey";
         var driverConfig = {
             type: 'chrome',
             showDriverLog: true,
             start: false,
             beforeStart: 'supervisorctl start ffmpeg',
             afterStop: 'supervisorctl stop ffmpeg',
-            videoFile: '/tmp/karate.mp4'
+            videoFile: 'ls /tmp/karate.mp4'
         };
         karate.configure('driver', driverConfig);
     } else if (karate.env === 'jobserver') {
@@ -25,6 +27,5 @@ function fn() {
     } else {
         karate.configure('driver', {type: 'chrome', showDriverLog: true});
     }
-    // karate.configure('report', {showLog: false, showAllSteps: false});
     return config;
 }
