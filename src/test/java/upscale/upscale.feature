@@ -4,9 +4,15 @@ Background:
   * driver MY_UPSCALE_WORKBENCH
   * def delays = 5
 
+@github
+Scenario: github
+  * call read('upscale.feature@logvariables')
+  * driver "https://github.com"
+  * delay(delays)
+
+
 @logvariables
 Scenario: logvariables
-  * assert( MY_UPSCALE_WORKBENCH !+ "" )
   * print "MY_UPSCALE_WORKBENCH is "+MY_UPSCALE_WORKBENCH
   * print "MY_UPSCALE_EMAIL is "+MY_UPSCALE_EMAIL
   * print "MY_HOME_DIRECTORY is "+MY_HOME_DIRECTORY
@@ -14,6 +20,7 @@ Scenario: logvariables
   * print "MY_GITHUB_TOKEN is "+MY_GITHUB_TOKEN
   * print "MY_GITHUB_USERNAME is "+MY_GITHUB_USERNAME
   * print "NOW is "+NOW 
+  * assert  MY_UPSCALE_WORKBENCH != "" 
 
 @login
 Scenario: login
@@ -93,4 +100,3 @@ Scenario: ConfirmLittleStickman
   * waitFor('{a}Account').click()
   * waitFor("{p}my-first-native-extension works!" ).click()
   * print("Success!")
-
