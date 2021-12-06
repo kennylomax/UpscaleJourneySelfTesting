@@ -18,15 +18,17 @@ class UpscaleTest {
     @Test
     public void runThruTutorial() throws Exception{
 
-         // mvn clean test -Dkarate.options="--tags @github" -Dtest=\!UpscaleTest#runThruTutorial 
+        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC}
+        // mvn clean test -Dkarate.options="--tags @github" -Dtest=\!UpscaleTest#runThruTutorial 
         // or
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @DownloadPWA"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
         // docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
         // mvn test -DargLine='-Dkarate.env=docker'  -Dtest=\!UpscaleTest#runThruTutorial -Dkarate.options="--tags @login"
         // Good examples at https://github.com/karatelabs/karate/blob/master/karate-demo/src/test/java/driver/core/test-01.feature
        
-        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC}
-        String path = String.valueOf(System.getProperty("Path"));
+      
+     
+       String path = String.valueOf(System.getProperty("Path"));
         System.out.println("Path is "+path);
         Boolean runningOnMac = Boolean.valueOf(System.getProperty("RunningOnMac"));
         System.out.println("runningOnMac is "+runningOnMac);
