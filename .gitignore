@@ -1,4 +1,6 @@
+.vscode
 commands.sh
+package-lock.json
 target/
 .DS_Store
-upscaleenv.sh
+
