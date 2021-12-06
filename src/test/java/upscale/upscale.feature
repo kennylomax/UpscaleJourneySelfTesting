@@ -6,6 +6,7 @@ Background:
   * def watchInput = function(loc, v) { waitFor(loc).highlight(); script(loc, "_.value = ''"); input(loc, v )  }
   * def watchSubmit = function() { waitFor('input[type=submit]').highlight(); click('input[type=submit]') }
   * def watchFor =  function(loc) {  waitFor(loc).highlight().click()  }
+ 
 
 @github
 Scenario: github
@@ -37,25 +38,31 @@ Scenario: login
   * watchSubmit()
   * delay(delays)
   
-@downloadPWA
-Scenario: downloadPWA
+@download_PWA
+Scenario: download_PWA
   * call read('upscale.feature@login')
-  * watchFor('{}Consumer Applications').click()
+  * watchFor('{^*:2}Settings')
+  * watchFor('{}Consumer Applications')
   * waitFor('{}PWA')
   * rightOf('{}PWA').find('button').click()
-  * watchFor('{}Edit application configuration').click()
+  * watchFor('{}Edit application configuration')
+  * delay(delays)
   * highlight('{}Save & download project')
+  * delay(delays)
+  * mouse('{}Save & download project').click()
+  * delay(delays)
   * mouse('{}Save & download project').down().up()
+  * delay(delays)
   * delay(delays)
 
 @CreateExtensionAndExperience
 Scenario: CreateExtensionAndExperience
   * call read('upscale.feature@login')
-  * watchFor('{}Advanced Settings').click()
-  * watchFor('a[id=side-navigation-subitem-extensions]').click()
+  * watchFor('{}Advanced Settings')
+  * watchFor('a[id=side-navigation-subitem-extensions]')
   * delay(delays)
-  * watchFor('div[class=new-button]').click()
-  * watchFor('{}PWA Native Extension (beta)').click()
+  * watchFor('div[class=new-button]')
+  * watchFor('{}PWA Native Extension (beta)')
   * delay(delays)
   * watchInput("input[placeholder='Extension name']", 'my-first-native-extension'+NOW)
   # this value must match the name from package.json
@@ -67,11 +74,11 @@ Scenario: CreateExtensionAndExperience
   * delay(delays)
   * def extensionID = locate('{label}Extension ID').nextSibling.text.trim()
   * print 'extensionID is '+extensionID
-  * watchFor('{span}Experiences').click()
-  * watchFor('{div}Coffeefy Mobile Commerce Experience').click()
-  * watchFor('{}Account').click()
-  * watchFor('{}Component').click()
-  * watchFor('{}Custom').click()
+  * watchFor('{span}Experiences')
+  * watchFor('{div}Coffeefy Mobile Commerce Experience')
+  * watchFor('{}Account')
+  * watchFor('{}Component')
+  * watchFor('{}Custom')
   * watchInput('input[id=extensionId]', extensionID )
   * watchInput('input[id=nativeComponentIdentifier]', 'hello-world')
   * waitFor('{button}Save').click()
@@ -80,15 +87,16 @@ Scenario: CreateExtensionAndExperience
 @DownloadNewPWA
 Scenario: DownloadNewPWA
   * call read('upscale.feature@login')
-  * watchFor('{}Consumer Applications').click()
+  * watchFor('{^*:2}Settings')
+  * watchFor('{}Consumer Applications')
   * waitFor('{}PWA')
-  * watchFor('{}PWA').find('button').click()
-  * watchFor('{}Edit application configuration').click()
-  * watchFor('{^}NG Coffeefy styling').click()
-  * watchFor('{span}my-first-native-extension'+NOW).click()
+  * rightOf('{}PWA').find('button').click()
+  * watchFor('{}Edit application configuration')
+  * watchFor('{^}NG Coffeefy styling')
+  * watchFor('{span}my-first-native-extension'+NOW)
   * watchInput('body', Key.ESCAPE)
   * delay(delays)
-  * watchFor('{}Save').click()
+  * watchFor('{}Save')
   * delay(delays)
   * highlight('{}Save & download project')
   * delay(delays)
@@ -100,7 +108,7 @@ Scenario: ConfirmLittleStickman
   * karate.waitForHttp('http://localhost:4200')
   * configure driver = { type: 'chrome', showDriverLog: false, showBrowserLog: false }
   * driver 'http://localhost:4200'
-  * watchFor('{button}I Agree').click()
-  * watchFor('{a}Account').click()
-  * watchFor("{p}my-first-native-extension works!" ).click()
+  * watchFor('{button}I Agree')
+  * watchFor('{a}Account')
+  * watchFor("{p}my-first-native-extension works!" )
   * print("Success!")

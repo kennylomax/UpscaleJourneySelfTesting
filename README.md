@@ -36,7 +36,7 @@ ng generate library my-first-native-extension
 ```
 
 Download the latest Upscale PWA Libraries:
-```clickpath:downloadPWA
+```clickpath:download_PWA
 YourUpscaleWorkbenchURL -> Consumer Applications -> PWA -> Edit application configuration -> Save & download project
 ```
 
