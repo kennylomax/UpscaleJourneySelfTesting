@@ -117,7 +117,7 @@ Extensions=NG Coffeefy styling, MyFirstExtension${NOW}
 Compile and run your new PWA
 ```commands 
 cd $MY_DOWNLOAD_FOLDER
-unzip application-pwa.zip 
+unzip -o application-pwa.zip 
 cd caas2-webapp
 npm install
 npm start
