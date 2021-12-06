@@ -10,3 +10,8 @@ export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey shou
 #Leave these alone
 export MY_HOME_DIRECTORY=${MY_HOME_DIRECTORY_PREFIX}/${NOW}
 export NOW=$( date '+%s000' )
+if [[ "$OSTYPE" == *"darwin"* ]]; then
+  export RUNNING_ON_MAC=true
+else 
+  export RUNNING_ON_MAC=false
+fi
