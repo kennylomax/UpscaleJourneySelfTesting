@@ -1,7 +1,7 @@
 Feature: UpscaleNativeExtension
 
 Background:
-  * driver MY_UPSCALE_WORKBENCH
+
   * def delays = 5000
   * def watchInput = function(loc, v) { waitFor(loc).highlight(); script(loc, "_.value = ''"); input(loc, v )  }
   * def watchSubmit = function() { waitFor('input[type=submit]').highlight(); click('input[type=submit]') }
@@ -32,6 +32,7 @@ Scenario: logvariables
 
 @login
 Scenario: login
+  * driver MY_UPSCALE_WORKBENCH
   * call read('upscale.feature@logvariables')
   * watchInput('input[id=email]', MY_UPSCALE_EMAIL)
   * watchInput('input[id=password]', MY_UPSCALE_PASSWORD)

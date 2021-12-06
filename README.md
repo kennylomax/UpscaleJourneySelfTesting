@@ -103,7 +103,7 @@ Remove the previousy downloaded PWA
 
 ```commands
 cd $MY_DOWNLOAD_FOLDER
-rm application-pwa.zip  
+rm application-pwa*.zip  
 ```
 
 Include your new extension in your PWA, then download it:

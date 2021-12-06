@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.Test;
 
 class UpscaleTest {
@@ -111,6 +110,11 @@ class StreamGobbler implements Runnable {
     @Override
     public void run() {
         new BufferedReader(new InputStreamReader(inputStream)).lines()
-          .forEach(consumer);
+          .forEach(s ->{
+              System.out.println(s);
+              if (s.contains("[ERROR]")){
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!\n" );
+              }              
+     } );
     }
 }
