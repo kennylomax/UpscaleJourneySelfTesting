@@ -17,7 +17,6 @@ Personalize your upscalenv.sh contents before applying it to your shell.
 source ~/upscaleenv.sh 
 ``` 
 
-
 Install Node and Angular v 12.2.10:
 
 ```commands
@@ -27,7 +26,8 @@ npm install -g @angular/cli@12.2.10
 ```
 
 Create an Angular app and within that an Angular library:
-```commands~/
+```commands
+~/
 mkdir $MY_HOME_DIRECTORY
 cd $MY_HOME_DIRECTORY
 ng new hello-world${NOW} --create-application=false
@@ -151,27 +151,22 @@ To verify:
 See Docs at https://github.com/karatelabs/karate/wiki/Docker
 ```
 
+cp ~/upscaleenv.sh  .
+docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/upscale ptrthomas/karate-chrome
+docker exec -it -w /upscale karate bash
+
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
+source upscaleenv.sh 
 cd UpscaleJourneySelfTesting
-docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
 
-cd UpscaleJourneySelfTesting
 open vnc://localhost:5900
-cp ~/upscaleenv.sh  src
-mkdir journey
-cd journey
-docker exec -it -w /src karate bash
-source src/upscaleenv.sh 
 
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @github"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @downloadPWA"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
+mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} 
+or
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
-  - export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
-  - export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey should occur
-
- 
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
-
+cp /tmp/karate.mp4 src
 
 docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 ```

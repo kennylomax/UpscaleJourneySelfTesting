@@ -20,9 +20,8 @@ class UpscaleTest {
 
     @Karate.Test
     Karate testUpscale() {
-
-
         // mvn clean test -Dkarate.options="--tags @github" -Dtest=\!UpscaleTest#runThruTutorial 
+        // or
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @DownloadPWA"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
         // docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
         // mvn test -DargLine='-Dkarate.env=docker'  -Dtest=\!UpscaleTest#runThruTutorial -Dkarate.options="--tags @login"
@@ -34,15 +33,20 @@ class UpscaleTest {
     public void runThruTutorial() throws Exception{
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} 
         String path =String.valueOf(System.getProperty("Path"));
+        readMeToScript( path+"/README.md", path+"/commandsLocal.sh", false);
+        readMeToScript( path+"/README.md",  path+"/commandsDocker.sh", true);
+        runCommand("chmod 700 commandsLocal.sh");
+        runCommand("chmod 700 commandsDocker.sh");
+        Boolean runningOnMac = Boolean.valueOf(System.getProperty("RUNNING_ON_MAC"));
         System.out.println("Path is "+path);
-        readMeToScript(
-            path+"/README.md",
-            path+"/commands.sh");
-        runCommand("chmod 700 commands.sh");
-        runCommand("./commands.sh");
+        System.out.println("runningOnMac is "+runningOnMac);
+        if (runningOnMac)
+            runCommand("./commandsLocal.sh");
+        else 
+            runCommand("./commandsDocker.sh");
     }
 
-    public void readMeToScript(String fileFrom, String fileTo)throws Exception{
+    public void readMeToScript(String fileFrom, String fileTo, boolean forDocker)throws Exception{
         StringBuffer script = new StringBuffer();
         List<String> lines = Files.readAllLines(Paths.get(fileFrom));
         boolean commands = false;
@@ -75,7 +79,11 @@ class UpscaleTest {
                 script.append("echo \"\u001b***[34mRunning clickpath "+l+"***\"; ");
                 script.append("pushd ${TESTING_HOME}; ");
                 script.append("pwd; ");
-                script.append("mvn test -Dtest=\\!UpscaleTest#runThruTutorial -Dkarate.options='--tags @"+clickPathName+"'; ");
+                if (forDocker)
+                    script.append("mvn test  -Dtest=\\!UpscaleTest#runThruTutorial -DargLine='-Dkarate.env=docker -Dkarate.options=\"--tags @"+clickPathName+ "\"' -Dtest=WebRunner");
+                else
+                    script.append("mvn test -Dtest=\\!UpscaleTest#runThruTutorial -Dkarate.options='--tags @"+clickPathName+"'; ");
+                
                 script.append("popd; ");
                 script.append("pwd; \u001b[0m");
             }
