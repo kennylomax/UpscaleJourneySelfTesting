@@ -5,13 +5,18 @@ export MY_UPSCALE_PASSWORD=xxx
 export MY_GITHUB_USERNAME=xxx
 # Needs repo and admin:plublic_key rights
 export MY_GITHUB_TOKEN=xxx
+
+# On OSX..
 export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
 export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey should occur
+
+# On Linux for Docker
+# export MY_DOWNLOAD_FOLDER=/home/chrome/Downloads
+# export MY_HOME_DIRECTORY_PREFIX=/src/journey
 
 #Leave these alone
 export MY_HOME_DIRECTORY=${MY_HOME_DIRECTORY_PREFIX}/${NOW}
 export NOW=$( date '+%s000' )
-
 if [[ "$OSTYPE" == *"darwin"* ]]; then
   export RUNNING_ON_MAC=true
   brew update

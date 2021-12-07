@@ -23,10 +23,10 @@ class UpscaleTest {
     public void runThruTutorial() throws Exception{
 
         // OSX: 
-        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC} 
+        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=true
         // mvn clean test -Dkarate.options="--tags @DownloadNewPWA" -Dtest=\!UpscaleTest#runThruTutorial 
         // Debian:    
-        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC}  -DargLine='-Dkarate.env=docker'
+        // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false  -DargLine='-Dkarate.env=docker'
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @ConfirmLittleStickman"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
         
         // docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
@@ -55,8 +55,13 @@ class UpscaleTest {
         script.append("export TESTING_HOME=$PWD ; ");
   
         for (String l:lines){
-            if  (l.startsWith("```commands"))
-                commands = true;
+            if  (  l.startsWith("```commands" )){
+                if (    runningOnMac && l.startsWith("```commandsDebianOnly" ) ||
+                        !runningOnMac && l.startsWith("```commandsOsxOnly" ))
+                    ;
+                else
+                    commands = true;
+            }
             else if (l.startsWith("```clickpath"))
                 clickpath = true;
             else if (l.startsWith("```")){

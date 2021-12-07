@@ -13,9 +13,15 @@ curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main
 
 Personalize your upscalenv.sh contents before applying it to your shell.
 
-```commands 
+```commandsOsxOnly
 source ~/upscaleenv.sh 
 ``` 
+
+```commandsDebianOnly
+source /src/upscaleenv.sh 
+mkdir -f /home/chrome/Downloads
+``` 
+
 
 Create an Angular app and within that an Angular library:
 ```commands
