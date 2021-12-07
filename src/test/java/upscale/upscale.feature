@@ -79,7 +79,8 @@ Scenario: CreateExtensionAndExperience
   * watchFor('{}Custom')
   * watchInput('input[id=extensionId]', extensionID )
   * watchInput('input[id=nativeComponentIdentifier]', 'hello-world')
-  * waitFor('{button}Save').click()
+  * watchFor('{button}Save').click()
+  * watchFor('{}Component updated.')
   * delay(delays)
 
 @DownloadNewPWA

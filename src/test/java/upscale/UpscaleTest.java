@@ -12,8 +12,12 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
+import java.util.logging.Logger;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UpscaleTest {
+    final static Logger LOGGER = Logger.getLogger(UpscaleTest.class.getName());
+
 
     @Test
     public void runThruTutorial() throws Exception{
@@ -24,8 +28,6 @@ class UpscaleTest {
         // Debian:    
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC}  -DargLine='-Dkarate.env=docker'
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @ConfirmLittleStickman"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
-        
-        
         
         // docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
         // mvn test -DargLine='-Dkarate.env=docker'  -Dtest=\!UpscaleTest#runThruTutorial -Dkarate.options="--tags @login"
@@ -97,31 +99,17 @@ class UpscaleTest {
         System.out.println("\u001b[34m"+s+"\u001b[0m" );
         ProcessBuilder builder = new ProcessBuilder();
         builder.command(s.split(" "));   
+        builder.redirectErrorStream(true);
         Process process = builder.start();
-        StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);
-        Executors.newSingleThreadExecutor().submit(streamGobbler);
+        BufferedReader reader =  new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+            assertFalse( line.contains("ERR!") || line.toLowerCase().contains("Error") || line.toLowerCase().contains("command not found"),
+            "Problematic output from command "+s) ;
+        }
         int exitCode = process.waitFor();
         assert exitCode == 0;
     }
 }
 
-class StreamGobbler implements Runnable {
-    private InputStream inputStream;
-    private Consumer<String> consumer;
-
-    public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
-        this.inputStream = inputStream;
-        this.consumer = consumer;
-    }
-
-    @Override
-    public void run() {
-        new BufferedReader(new InputStreamReader(inputStream)).lines()
-          .forEach(s ->{
-              System.out.println(s);
-              if (s.contains("[ERROR]")){
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!\n" );
-              }              
-     } );
-    }
-}

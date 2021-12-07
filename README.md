@@ -14,13 +14,16 @@ curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main
 Personalize your upscalenv.sh contents before applying it to your shell.
 
 ```commands 
-source ~/upscaleenv.sh 
+cat ~/upscaleenv.sh 
 ``` 
 
 Create an Angular app and within that an Angular library:
 ```commands
 mkdir -p $MY_HOME_DIRECTORY
 cd $MY_HOME_DIRECTORY
+
+npm start
+
 ng new hello-world${NOW} --create-application=false
 cd hello-world${NOW}
 ng generate library my-first-native-extension
