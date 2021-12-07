@@ -18,7 +18,7 @@ source ~/upscaleenv.sh
 ``` 
 
 ```commandsDebianOnly
-source ./upscaleenv.sh 
+source ./upscaleenvdocker.sh 
 mkdir -p /home/chrome/Downloads
 ``` 
 
@@ -154,9 +154,10 @@ To verify:
 See Docs at https://github.com/karatelabs/karate/wiki/Docker
 ```
 
-cp ~/upscaleenv.sh  .
+cp ~/upscaleenv.sh  ./upscaleenvdocker.sh 
+vi ./upscaleenvdocker.sh 
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
-ir
+
 open vnc://localhost:5900
 
 docker exec -it -w /src karate bash

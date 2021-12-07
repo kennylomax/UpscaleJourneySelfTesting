@@ -3,4 +3,4 @@ commands.sh
 package-lock.json
 target/
 .DS_Store
-
+upscaleenvdocker.sh 
