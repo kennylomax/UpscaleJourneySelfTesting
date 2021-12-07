@@ -30,7 +30,7 @@ ng new hello-world${NOW} --create-application=false
 cd hello-world${NOW}
 ng generate library my-first-native-extension --verbose
 pushd $MY_DOWNLOAD_FOLDER
-rm application-pwa*.zip
+rm -f application-pwa*.zip
 popd
 
 ```
