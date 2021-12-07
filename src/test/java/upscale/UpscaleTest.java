@@ -20,7 +20,7 @@ class UpscaleTest {
 
         // OSX: 
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC} 
-        // mvn clean test -Dkarate.options="--tags @download_PWA" -Dtest=\!UpscaleTest#runThruTutorial 
+        // mvn clean test -Dkarate.options="--tags @DownloadNewPWA" -Dtest=\!UpscaleTest#runThruTutorial 
         // Debian:    
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=${RUNNING_ON_MAC}  -DargLine='-Dkarate.env=docker'
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @ConfirmLittleStickman"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner

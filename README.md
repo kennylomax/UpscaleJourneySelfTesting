@@ -75,7 +75,6 @@ git init
 git add my-first-native-extension-0.0.1.tgz README.md
 git commit -m "first commit"
 git branch -M main
-#git remote add origin https://github.com/$MY_GITHUB_USERNAME/my-first-native-extension${NOW}.git
 git remote add origin https://${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/my-first-native-extension${NOW}.git
 git push -u origin main
 ``` 

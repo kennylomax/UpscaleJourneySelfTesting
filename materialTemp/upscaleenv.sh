@@ -3,6 +3,7 @@ export MY_UPSCALE_WORKBENCH=https://xxx.approuter.stage-use1.js-stage.shoot.live
 export MY_UPSCALE_EMAIL=xxx.xxx@sap.com 
 export MY_UPSCALE_PASSWORD=xxx 
 export MY_GITHUB_USERNAME=xxx
+# Needs repo and admin:plublic_key rights
 export MY_GITHUB_TOKEN=xxx
 export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
 export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey should occur

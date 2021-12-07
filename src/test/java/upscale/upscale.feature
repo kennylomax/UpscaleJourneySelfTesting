@@ -4,7 +4,7 @@ Background:
   * def delays = 5000
   * def watchInput = function(loc, v) { waitFor(loc).highlight(); script(loc, "_.value = ''"); input(loc, v )  }
   * def watchSubmit = function() { waitFor('input[type=submit]').highlight(); click('input[type=submit]') }
-  * def watchFor =  function(loc) {  waitFor(loc).highlight().click()  
+  * def watchFor =  function(loc) {  waitFor(loc).highlight().click()   }
 
 @github
 Scenario: github
@@ -46,12 +46,11 @@ Scenario: download_PWA
   * rightOf('{}PWA').find('button').click()
   * watchFor('{}Edit application configuration')
   * delay(delays)
+  * watchFor('{}Save')
+  * watchFor('{}Configuration updated.')
   * highlight('{}Save & download project')
-  * delay(delays)
-  * mouse('{}Save & download project').click()
-  * delay(delays)
   * mouse('{}Save & download project').down().up()
-  * delay(delays)
+  * watchFor('{}App download ready.')
   * delay(delays)
 
 @CreateExtensionAndExperience
@@ -96,15 +95,10 @@ Scenario: DownloadNewPWA
   * watchInput('body', Key.ESCAPE)
   * delay(delays)
   * watchFor('{}Save')
-  * delay(delays)
+  * watchFor('{}Configuration updated.')
   * highlight('{}Save & download project')
-  * delay(delays)
-  * mouse('{}Save & download project').click()
-  * delay(delays)
-  * delay(delays)
   * mouse('{}Save & download project').down().up()
-  * delay(delays)
-  * delay(delays)
+  * watchFor('{}App download ready.')
   * delay(delays)
 
 @ConfirmLittleStickman
