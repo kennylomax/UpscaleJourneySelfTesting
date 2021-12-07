@@ -19,7 +19,7 @@ source ~/upscaleenv.sh
 
 ```commandsDebianOnly
 source /src/upscaleenv.sh 
-mkdir -f /home/chrome/Downloads
+mkdir -p /home/chrome/Downloads
 ``` 
 
 
@@ -156,16 +156,14 @@ See Docs at https://github.com/karatelabs/karate/wiki/Docker
 
 cp ~/upscaleenv.sh  .
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
-
+ir
 open vnc://localhost:5900
 
 docker exec -it -w /src karate bash
 
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
-source upscaleenv.sh 
 cd UpscaleJourneySelfTesting
-
-mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} 
+mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
 or
 mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
