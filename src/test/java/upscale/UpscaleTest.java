@@ -112,7 +112,7 @@ class UpscaleTest {
             System.out.println(line);
             assertFalse( line.toLowerCase().contains("err!") || 
             line.toLowerCase().contains("error") || 
-            line.toLowerCase().contains("command not found") ||
+            line.toLowerCase().contains("not found") ||
             line.toLowerCase().contains("no such file")
             );
          }
