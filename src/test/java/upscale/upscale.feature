@@ -48,8 +48,9 @@ Scenario: download_PWA
   * delay(delays)
   * watchFor('{}Save')
   * watchFor('{}Configuration updated.')
-  * highlight('{}Save & download project')
-  * mouse('{}Save & download project').down().up()
+  * watchFor('{}Save & download project')
+#  * highlight('{}Save & download project')
+#  * mouse('{}Save & download project').down().up()
   * watchFor('{}App download ready.')
   * delay(delays)
 
@@ -69,7 +70,7 @@ Scenario: CreateExtensionAndExperience
   * watchInput('input[placeholder=Location]', 'https://raw.githubusercontent.com/'+MY_GITHUB_USERNAME+'/my-first-native-extension'+NOW+'/main/my-first-native-extension-0.0.1.tgz')
   * delay(delays)
   * watchFor('{}Save')
-  * delay(delays)
+  * watchFor('{}Component saved.')
   * def extensionID = locate('{label}Extension ID').nextSibling.text.trim()
   * print 'extensionID is '+extensionID
   * watchFor('{span}Experiences')
