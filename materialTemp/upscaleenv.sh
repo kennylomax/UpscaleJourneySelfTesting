@@ -10,6 +10,7 @@ export MY_GITHUB_TOKEN=xxx
 export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
 export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey should occur
 
+
 # On Linux for Docker
 # export MY_DOWNLOAD_FOLDER=/home/chrome/Downloads
 # export MY_HOME_DIRECTORY_PREFIX=/src/journey
@@ -30,7 +31,7 @@ else
   # See https://linuxize.com/post/how-to-install-node-js-on-debian-10/
   curl -sL https://deb.nodesource.com/setup_12.x |  bash -
   apt-get install -y nodejs
-  echo N | npm install -g @angular/cli@12.2.10
+  echo N | /usr/bin/npm install -g @angular/cli@12.2.10
   git config --global user.email $MY_GITHUB_USERNAME
   git config --global user.name $MY_GITHUB_TOKEN
 fi
