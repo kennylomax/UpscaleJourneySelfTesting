@@ -6,7 +6,7 @@ https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/README.md
 
 Fetch the file upscaleenv.sh:
 ``` 
-curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/upscaleenv.sh > ~/upscaleenv.sh 
+curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/exampleupscaleenv.sh > ~/upscaleenv.sh 
 ```
 
 # Journey
@@ -21,7 +21,6 @@ source ~/upscaleenv.sh
 source ./upscaleenvdocker.sh 
 mkdir -p /home/chrome/Downloads
 ``` 
-
 
 Create an Angular app and within that an Angular library:
 ```commands
