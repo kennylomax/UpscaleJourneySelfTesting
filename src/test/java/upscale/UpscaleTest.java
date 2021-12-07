@@ -53,7 +53,7 @@ class UpscaleTest {
         String clickPathName="";
         boolean addedClickpath=false;
         if (!runningOnMac)
-            script.append("!/bin/bash\n "); 
+            script.append("#!/bin/bash\n "); 
         script.append("export TESTING_HOME=$PWD ; ");
     
         for (String l:lines){
