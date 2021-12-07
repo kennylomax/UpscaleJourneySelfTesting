@@ -18,7 +18,7 @@ source ~/upscaleenv.sh
 ``` 
 
 ```commandsDebianOnly
-source ./upscaleenvdocker.sh 
+source /src/upscaleenvdocker.sh 
 mkdir -p /home/chrome/Downloads
 ``` 
 
