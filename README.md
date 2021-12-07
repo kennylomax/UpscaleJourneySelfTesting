@@ -28,7 +28,7 @@ mkdir -p $MY_HOME_DIRECTORY
 cd $MY_HOME_DIRECTORY
 ng new hello-world${NOW} --create-application=false
 cd hello-world${NOW}
-ng generate library my-first-native-extension
+ng generate library my-first-native-extension --verbose
 pushd $MY_DOWNLOAD_FOLDER
 rm application-pwa*.zip
 popd
@@ -103,7 +103,7 @@ Remove the previousy downloaded PWA
 
 ```commands
 pushd $MY_DOWNLOAD_FOLDER
-rm application-pwa*.zip  
+rm -f application-pwa*.zip  
 popd
 
 ```
@@ -121,7 +121,7 @@ Compile and run your new PWA
 pushd $MY_DOWNLOAD_FOLDER
 unzip -o application-pwa.zip 
 cd caas2-webapp
-npm install
+npm install 
 npm start
 ``` 
 Access your site and confirm the stick man is there.
