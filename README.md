@@ -18,7 +18,7 @@ source ~/upscaleenv.sh
 ``` 
 
 ```commandsDebianOnly
-source /src/upscaleenv.sh 
+source ./upscaleenv.sh 
 mkdir -p /home/chrome/Downloads
 ``` 
 
