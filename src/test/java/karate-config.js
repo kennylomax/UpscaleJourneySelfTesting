@@ -11,8 +11,8 @@ function fn() {
         NOW: java.lang.System.getenv('NOW')  
       }
     if (karate.env === 'docker') {
-        config.MY_DOWNLOAD_FOLDER = "/home/chrome/Downloads";
-        config.MY_HOME_DIRECTORY="/src/journey";
+//        config.MY_DOWNLOAD_FOLDER = "/home/chrome/Downloads";
+//        config.MY_HOME_DIRECTORY="/src/journey";
         var driverConfig = {
             type: 'chrome',
             showDriverLog: true,

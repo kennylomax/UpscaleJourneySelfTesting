@@ -17,22 +17,17 @@ Personalize your upscalenv.sh contents before applying it to your shell.
 source ~/upscaleenv.sh 
 ``` 
 
-Install Node and Angular v 12.2.10:
-
-```commands
-brew update
-brew install node
-npm install -g @angular/cli@12.2.10
-```
-
 Create an Angular app and within that an Angular library:
 ```commands
-~/
-mkdir $MY_HOME_DIRECTORY
+mkdir -p $MY_HOME_DIRECTORY
 cd $MY_HOME_DIRECTORY
 ng new hello-world${NOW} --create-application=false
 cd hello-world${NOW}
 ng generate library my-first-native-extension
+pushd $MY_DOWNLOAD_FOLDER
+rm application-pwa*.zip
+popd
+
 ```
 
 Download the latest Upscale PWA Libraries:
@@ -80,7 +75,8 @@ git init
 git add my-first-native-extension-0.0.1.tgz README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/$MY_GITHUB_USERNAME/my-first-native-extension${NOW}.git
+#git remote add origin https://github.com/$MY_GITHUB_USERNAME/my-first-native-extension${NOW}.git
+git remote add origin https://${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/my-first-native-extension${NOW}.git
 git push -u origin main
 ``` 
 
@@ -102,8 +98,10 @@ YourUpscaleWorkbenchURL -> Experiences -> Coffeefy Mobile Commerce Experience ->
 Remove the previousy downloaded PWA 
 
 ```commands
-cd $MY_DOWNLOAD_FOLDER
+pushd $MY_DOWNLOAD_FOLDER
 rm application-pwa*.zip  
+popd
+
 ```
 
 Include your new extension in your PWA, then download it:
@@ -116,7 +114,7 @@ Extensions=NG Coffeefy styling, MyFirstExtension${NOW}
 
 Compile and run your new PWA
 ```commands 
-cd $MY_DOWNLOAD_FOLDER
+pushd $MY_DOWNLOAD_FOLDER
 unzip -o application-pwa.zip 
 cd caas2-webapp
 npm install
@@ -152,14 +150,15 @@ See Docs at https://github.com/karatelabs/karate/wiki/Docker
 ```
 
 cp ~/upscaleenv.sh  .
-docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/upscale ptrthomas/karate-chrome
-docker exec -it -w /upscale karate bash
+docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
+
+open vnc://localhost:5900
+
+docker exec -it -w /src karate bash
 
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 source upscaleenv.sh 
 cd UpscaleJourneySelfTesting
-
-open vnc://localhost:5900
 
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} 
 or

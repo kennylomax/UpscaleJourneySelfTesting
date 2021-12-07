@@ -1,12 +1,10 @@
 Feature: UpscaleNativeExtension
 
 Background:
-
   * def delays = 5000
   * def watchInput = function(loc, v) { waitFor(loc).highlight(); script(loc, "_.value = ''"); input(loc, v )  }
   * def watchSubmit = function() { waitFor('input[type=submit]').highlight(); click('input[type=submit]') }
-  * def watchFor =  function(loc) {  waitFor(loc).highlight().click()  }
- 
+  * def watchFor =  function(loc) {  waitFor(loc).highlight().click()  
 
 @github
 Scenario: github
@@ -101,7 +99,12 @@ Scenario: DownloadNewPWA
   * delay(delays)
   * highlight('{}Save & download project')
   * delay(delays)
+  * mouse('{}Save & download project').click()
+  * delay(delays)
+  * delay(delays)
   * mouse('{}Save & download project').down().up()
+  * delay(delays)
+  * delay(delays)
   * delay(delays)
 
 @ConfirmLittleStickman
