@@ -1,4 +1,5 @@
 .vscode/
+.vscode
 commands.sh
 package-lock.json
 target/
