@@ -110,7 +110,11 @@ class UpscaleTest {
         String line;
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
-            assertFalse( line.contains("ERR!") || line.toLowerCase().contains("Error") || line.toLowerCase().contains("command not found"));
+            assertFalse( line.toLowerCase().contains("err!") || 
+            line.toLowerCase().contains("error") || 
+            line.toLowerCase().contains("command not found") ||
+            line.toLowerCase().contains("no such file")
+            );
          }
         int exitCode = process.waitFor();
         assert exitCode == 0;
