@@ -49,8 +49,6 @@ Scenario: download_PWA
   * watchFor('{}Save')
   * watchFor('{}Configuration updated.')
   * watchFor('{}Save & download project')
-#  * highlight('{}Save & download project')
-#  * mouse('{}Save & download project').down().up()
   * watchFor('{}App download ready.')
   * delay(delays)
 
@@ -71,6 +69,7 @@ Scenario: CreateExtensionAndExperience
   * delay(delays)
   * watchFor('{}Save')
   * watchFor('{}Component saved.')
+  * watchFor('{label}Extension ID')
   * def extensionID = locate('{label}Extension ID').nextSibling.text.trim()
   * print 'extensionID is '+extensionID
   * watchFor('{span}Experiences')
@@ -97,8 +96,7 @@ Scenario: DownloadNewPWA
   * delay(delays)
   * watchFor('{}Save')
   * watchFor('{}Configuration updated.')
-  * highlight('{}Save & download project')
-  * mouse('{}Save & download project').down().up()
+  * watchFor('{}Save & download project')
   * watchFor('{}App download ready.')
   * delay(delays)
 
