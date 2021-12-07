@@ -87,7 +87,7 @@ class UpscaleTest {
                 script.append(c);
                 
                 script.append("popd; ");
-                script.append("pwd; \u001b[0m");
+                script.append("pwd; ");
             }
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileTo));
