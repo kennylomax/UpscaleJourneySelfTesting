@@ -28,7 +28,7 @@ mkdir -p $MY_HOME_DIRECTORY
 cd $MY_HOME_DIRECTORY
 ng new hello-world${NOW} --create-application=false
 cd hello-world${NOW}
-ng generate library my-first-native-extension --verbose
+ng generate library my-first-native-extension
 pushd $MY_DOWNLOAD_FOLDER
 rm -f application-pwa*.zip
 popd
@@ -64,9 +64,10 @@ curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main
 curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/my-first-native-extension.module.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.module.ts
 ``` 
  
-Build and package - !!we should not need npm install --save form-data
+Build and package - !!we should not need npm install --save form-data, but seems necessary on linux?
 
 ```commands 
+npm install --save form-data
 ng build --configuration production
 npm pack ./dist/my-first-native-extension
 ``` 
@@ -80,7 +81,7 @@ git init
 git add my-first-native-extension-0.0.1.tgz README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/my-first-native-extension${NOW}.git
+git remote add origin https://${MY_GITHUB_USERNAME}:${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/my-first-native-extension${NOW}.git
 git push -u origin main
 ``` 
 
@@ -158,14 +159,13 @@ vi ./upscaleenvdocker.sh
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
 
 open vnc://localhost:5900
-
 docker exec -it -w /src karate bash
-
+source upscaleenvdocker.sh 
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 cd UpscaleJourneySelfTesting
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
 or
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @download_PWA"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
 cp /tmp/karate.mp4 src

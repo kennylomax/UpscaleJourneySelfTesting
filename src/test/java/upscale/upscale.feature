@@ -30,12 +30,14 @@ Scenario: logvariables
 
 @login
 Scenario: login
+#  * driver startRecordingScreen()
   * driver MY_UPSCALE_WORKBENCH
   * call read('upscale.feature@logvariables')
   * watchInput('input[id=email]', MY_UPSCALE_EMAIL)
   * watchInput('input[id=password]', MY_UPSCALE_PASSWORD)
   * watchSubmit()
   * delay(delays)
+#  * driver saveRecordingScreen("invoice.mp4",true)
   
 @download_PWA
 Scenario: download_PWA
@@ -49,7 +51,7 @@ Scenario: download_PWA
   * watchFor('{}Save')
   * watchFor('{}Configuration updated.')
   * watchFor('{}Save & download project')
-  * watchFor('{}App download ready.')
+  * delay(delays)
   * delay(delays)
 
 @CreateExtensionAndExperience
@@ -79,7 +81,7 @@ Scenario: CreateExtensionAndExperience
   * watchFor('{}Custom')
   * watchInput('input[id=extensionId]', extensionID )
   * watchInput('input[id=nativeComponentIdentifier]', 'hello-world')
-  * watchFor('{button}Save').click()
+  * watchFor('{button}Save')
   * watchFor('{}Component updated.')
   * delay(delays)
 
@@ -98,7 +100,7 @@ Scenario: DownloadNewPWA
   * watchFor('{}Save')
   * watchFor('{}Configuration updated.')
   * watchFor('{}Save & download project')
-  * watchFor('{}App download ready.')
+  * delay(delays)
   * delay(delays)
 
 @ConfirmLittleStickman

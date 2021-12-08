@@ -24,7 +24,7 @@ class UpscaleTest {
 
         // OSX: 
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=true
-        // mvn clean test -Dkarate.options="--tags @DownloadNewPWA" -Dtest=\!UpscaleTest#runThruTutorial 
+        // mvn clean test -Dkarate.options="--tags @login" -Dtest=\!UpscaleTest#runThruTutorial 
         // Debian:    
         // mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false  -DargLine='-Dkarate.env=docker'
         // mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @ConfirmLittleStickman"' -Dtest=\!UpscaleTest#runThruTutorial -Dtest=WebRunner
@@ -113,9 +113,9 @@ class UpscaleTest {
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
             assertFalse( line.toLowerCase().contains("err!") || 
-            line.toLowerCase().contains("error") || 
-            line.toLowerCase().contains("not found") ||
-            line.toLowerCase().contains("no such file")
+                line.toLowerCase().contains("[error]") || 
+                line.toLowerCase().contains("not found") ||
+                line.toLowerCase().contains("no such file")
             );
          }
         int exitCode = process.waitFor();
