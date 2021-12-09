@@ -4,12 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import java.util.logging.Logger;
@@ -87,11 +84,16 @@ class UpscaleTest {
                 script.append("pushd ${TESTING_HOME}; ");
                 script.append("pwd; ");
                 
-                String c = "mvn test  -Dtest=\\!UpscaleTest#runThruTutorial -DargLine='-Dkarate.env=docker -Dkarate.options=\"--tags @"+clickPathName+ "\"' -Dtest=WebRunner; ";             
-                if (runningOnMac)
-                     c =  "mvn clean test -Dkarate.options='--tags @"+clickPathName+"' -Dtest=\\!UpscaleTest#runThruTutorial;  ";
-                script.append("echo \"\u001b[31m"+c+"\u001b[0m\"; ");
-                script.append(c);
+                if (runningOnMac){
+                    String c =  "mvn clean test -Dkarate.options='--tags @"+clickPathName+"' -Dtest=\\!UpscaleTest#runThruTutorial;  ";
+                    script.append("echo \"\u001b[31m"+c+"\u001b[0m\"; ");
+                    script.append(c);
+                }else {
+                    String c = "mvn test  -Dtest=\\!UpscaleTest#runThruTutorial -DargLine='-Dkarate.env=docker -Dkarate.options=\"--tags @"+clickPathName+ "\"' -Dtest=WebRunner; ";             
+                    script.append("echo \"\u001b[31m"+c+"\u001b[0m\"; ");
+                    script.append(c);
+                    script.append("mkdir -p /src/journey/$NOW;  cp /tmp/karate.mp4 /src/journey/$NOW/karate_"+clickPathName+".mp4; ");
+                }
                 
                 script.append("popd; ");
                 script.append("pwd; ");
@@ -115,6 +117,7 @@ class UpscaleTest {
             assertFalse( line.toLowerCase().contains("err!") || 
                 line.toLowerCase().contains("[error]") || 
                 line.toLowerCase().contains("not found") ||
+                line.toLowerCase().contains("fatal: authentication failed") ||
                 line.toLowerCase().contains("no such file")
             );
          }

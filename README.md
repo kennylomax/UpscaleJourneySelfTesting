@@ -13,6 +13,7 @@ curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main
 
 Personalize your upscalenv.sh contents before applying it to your shell.
 
+
 ```commandsOsxOnly
 source ~/upscaleenv.sh 
 ``` 
@@ -20,6 +21,25 @@ source ~/upscaleenv.sh
 ```commandsDebianOnly
 source /src/upscaleenvdocker.sh 
 mkdir -p /home/chrome/Downloads
+```
+
+```commandsDebianOnly
+curl --user "$MY_GITHUB_USERNAME:$MY_GITHUB_TOKEN" -X POST https://api.github.com/user/repos -d '{"name": "preflightCheck'"$NOW"'", "public": "true"}'
+mkdir -p $MY_HOME_DIRECTORY/preflightCheck
+pushd $MY_HOME_DIRECTORY/preflightCheck
+rm -rf .git
+echo "# preflightCheck" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://${MY_GITHUB_USERNAME}:${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/preflightCheck${NOW}.git
+git push -u origin main
+popd
+
+``` 
+
+
 ``` 
 
 Create an Angular app and within that an Angular library:
@@ -170,5 +190,4 @@ mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @download
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
 cp /tmp/karate.mp4 src
 
-docker exec -it -w /src karate mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @login"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 ```
