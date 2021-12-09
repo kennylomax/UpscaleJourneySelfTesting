@@ -6,14 +6,12 @@ Background:
   * def watchSubmit = function() { waitFor('input[type=submit]').highlight(); click('input[type=submit]') }
   * def watchFor =  function(loc) {  waitFor(loc).highlight().click()   }
 
-@github
-Scenario: github
+@preflightChecks
+Scenario: preflightChecks
   * driver "https://nodejs.org/en/download/"
-  * watchFor( '{a}64-bit')
-  * driver "https://github.com/login"
-  * watchInput( 'input[name=login]','kennylomax')
-  * watchInput( 'input[name=password]','xx!')
-  * watchSubmit( )
+  * watchFor( '{a}64-bit / ARM64')
+  * delay(delays)
+  * watchInput('body', Key.ESCAPE)
   * delay(delays)
 
 @logvariables
@@ -106,7 +104,6 @@ Scenario: DownloadNewPWA
 @ConfirmLittleStickman
 Scenario: ConfirmLittleStickman
   * karate.waitForHttp('http://localhost:4200')
-  * configure driver = { type: 'chrome', showDriverLog: false, showBrowserLog: false }
   * driver 'http://localhost:4200'
   * watchFor('{button}I Agree')
   * watchFor('{a}Account')

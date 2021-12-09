@@ -20,6 +20,7 @@ function fn() {
             beforeStart: 'supervisorctl start ffmpeg',
             afterStop: 'supervisorctl stop ffmpeg',
             videoFile: 'ls /tmp/karate.mp4'
+            , webDriverSession: { prefs: { 'download.prompt_for_download': 'false' , 'download.default_directory': '/home/chrome/Downloads' } } 
         };
         karate.configure('driver', driverConfig);
     } else if (karate.env === 'jobserver') {

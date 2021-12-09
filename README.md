@@ -35,7 +35,16 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://${MY_GITHUB_USERNAME}:${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/preflightCheck${NOW}.git
 git push -u origin main
+mkdir -p MY_DOWNLOAD_FOLDER
+pushd MY_DOWNLOAD_FOLDER
+rm -f *
 popd
+popd
+
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
+cp MY_DOWNLOAD_FOLDER/node-v16.13.1.pkg .
+
+
 
 ``` 
 
@@ -185,9 +194,11 @@ git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 cd UpscaleJourneySelfTesting
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
 or
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @download_PWA"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
+mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
 cp /tmp/karate.mp4 src
+
+docker cp karate:/tmp .
 
 ```

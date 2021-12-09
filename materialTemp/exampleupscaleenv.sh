@@ -5,6 +5,7 @@ export MY_UPSCALE_PASSWORD=xxx
 export MY_GITHUB_USERNAME=xxx
 # Needs repo and admin:plublic_key rights
 export MY_GITHUB_TOKEN=xxx
+export MY_GITHUB_EMAIL=xxx
 
 # On OSX..
 export MY_DOWNLOAD_FOLDER=/Users/xxx/Downloads  
