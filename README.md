@@ -5,6 +5,15 @@
 - The proposal is to have a series of these self-validating journeys, to  serve as *tutorials*, *demos*, and also as *end-to-end tests* for inclusion in CICD pipelines.
 - The journey can be run in Docker (instructions at the bottom) to a) validate it, b) create videos of the click paths for inclusion in the journey doc.
 
+
+
+
+
+
+https://user-images.githubusercontent.com/6401254/145590018-ab3bd68c-4ba3-45e2-8e2e-cd50103980e6.mp4
+
+
+
 # Tested on Mac and Docker.
 
 https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/README.md
@@ -42,8 +51,6 @@ Download the latest Upscale PWA Libraries from he Upscale Workbench:
 ```clickpath:download_PWA
 YourUpscaleWorkbenchURL -> Consumer Applications -> PWA -> Edit application configuration -> Save & download project
 ```
-https://user-images.githubusercontent.com/6401254/145571115-dbd3aa00-91a2-4e76-84a6-8926584717be.mp4
-
 
 Copy the downloaded libs into your Angular app, which include a thin client SDK, that the PWA uses to access APIs, and the web storefront SDK.
 
@@ -105,6 +112,8 @@ YourUpscaleWorkbenchURL -> Experiences -> Coffeefy Mobile Commerce Experience ->
   PWA Native Extension Component (beta)=<the name used in your registration hello-world${NOW}/projects/my-first-native-extension/src/lib/my-first-native-extension.module.ts>
   -> Save
 ``` 
+https://user-images.githubusercontent.com/6401254/145589999-02ffe2d0-e05d-4d2e-a111-bd532790382b.mp4
+
 
 Remove the previousy downloaded PWA:
 
@@ -136,6 +145,8 @@ Access your site at http://localhost:4200/ and confirm the stick man is there.
 ```clickpath:ConfirmLittleStickman
 localhost:4200 -> Account -> confirmYouSeeYourLittleStickMan :)
 ``` 
+https://user-images.githubusercontent.com/6401254/145590014-d3e3a5f6-bdfc-4d1c-bfcd-e3f7f2c527da.mp4
+
 
 # Lessons Learned 
 - Design UIs to be easy to use but ALSO easy to test. That means
