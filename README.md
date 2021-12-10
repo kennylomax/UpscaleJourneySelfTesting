@@ -44,9 +44,10 @@ YourUpscaleWorkbenchURL -> Consumer Applications -> PWA -> Edit application conf
 ```
 
 
+https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/.github/images/karate_DownloadNewPWA.mp4
+
 https://user-images.githubusercontent.com/6401254/145571115-dbd3aa00-91a2-4e76-84a6-8926584717be.mp4
 
-https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/videos/karate_DownloadNewPWA.mp4
 
 Copy the downloaded libs into your Angular app, which include a thin client SDK, that the PWA uses to access APIs, and the web storefront SDK.
 
