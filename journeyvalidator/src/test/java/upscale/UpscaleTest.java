@@ -36,10 +36,9 @@ class UpscaleTest {
         System.out.println("Path is "+path);
         Boolean runningOnMac = Boolean.valueOf(System.getProperty("RunningOnMac"));
         System.out.println("runningOnMac is "+runningOnMac);
-        readMeToScript( path+"/README.md", path+"/commands.sh", runningOnMac);
+        readMeToScript( path+"/../README.md", path+"/commands.sh", runningOnMac);
         runCommand("chmod 700 commands.sh");
         runCommand("./commands.sh");
-        
     }
 
     public void readMeToScript(String fileFrom, String fileTo, boolean runningOnMac)throws Exception{
@@ -116,7 +115,7 @@ class UpscaleTest {
             System.out.println(line);
             assertFalse( line.toLowerCase().contains("err!") || 
                 line.toLowerCase().contains("[error]") || 
-                line.toLowerCase().contains("not found") ||
+                line.toLowerCase().contains("not found: npm") ||
                 line.toLowerCase().contains("fatal: authentication failed") ||
                 line.toLowerCase().contains("no such file")
             );

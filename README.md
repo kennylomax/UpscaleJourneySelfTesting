@@ -13,7 +13,7 @@ https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/README.md
 
 Fetch the file upscaleenv.sh:
 ``` 
-curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/exampleupscaleenv.sh > ~/upscaleenv.sh 
+curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/journeymaterial/exampleupscaleenv.sh > ~/upscaleenv.sh 
 ```
 .. and personlize the contents.
 
@@ -63,8 +63,8 @@ sed -i -e 's/"inlineSources": true,/"inlineSources": true, "strictNullChecks":fa
 
 Adjust/Create 2 new files:
 ```commands 
-curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/my-first-native-extension.component.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.component.ts
-curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/my-first-native-extension.module.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.module.ts
+curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/journeymaterial/my-first-native-extension.component.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.component.ts
+curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/journeymaterial/my-first-native-extension.module.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.module.ts
 ``` 
  
 Build and package:
@@ -139,22 +139,21 @@ localhost:4200 -> Account -> confirmYouSeeYourLittleStickMan :)
 - Design UIs to be easy to use but ALSO easy to test. That means
 - having unique text in the text fields, avoiding (unless good reason) fancy dropdowns and popups). 
 
+# To run in OSX
+- cd journeyvalidator
+- mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=true
 
 # To run in Docker
 See Docs at https://github.com/karatelabs/karate/wiki/Docker
 
-```
-cp ~/upscaleenv.sh  ./upscaleenvdocker.sh 
-vi ./upscaleenvdocker.sh 
+- cp ~/upscaleenv.sh  ./upscaleenvdocker.sh 
+- vi ./upscaleenvdocker.sh 
+- docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
+- open vnc://localhost:5900
+- docker exec -it -w /src karate bash
+- mkdir -p /home/chrome/Downloads
+- source upscaleenvdocker.sh 
+- git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
+- cd UpscaleJourneySelfTesting
+- mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
 
-docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
-
-open vnc://localhost:5900
-
-docker exec -it -w /src karate bash
-mkdir -p /home/chrome/Downloads
-source upscaleenvdocker.sh 
-git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
-cd UpscaleJourneySelfTesting
-mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
-```
