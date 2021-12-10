@@ -1,4 +1,11 @@
-Tested on Mac.
+# About this
+
+- This Upscale Journey is based on Adriaan's Upscale Demo.
+- It is written in a format that allows us to test the journey itself end-to-end on a mac or docker including the commandline commands, and clickpaths.
+- The plan is to have a series of journeys that are self-testable, and serve as tutorials, demos and end-to-end tests for inclusion in CICD pipelines.
+- The journey can be run in Docker (instructions at the bottom) to a) validate it, b) create videos of the click paths for inclusion in the journey doc.
+
+# Tested on Mac and Docker.
 
 https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/README.md
 
@@ -8,48 +15,15 @@ Fetch the file upscaleenv.sh:
 ``` 
 curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/exampleupscaleenv.sh > ~/upscaleenv.sh 
 ```
+.. and personlize the contents.
 
 # Journey
 
-Personalize your upscalenv.sh contents before applying it to your shell.
-
+Applying upscaleenv.sh to your shell:
 
 ```commandsOsxOnly
 source ~/upscaleenv.sh 
-``` 
-
-```commandsDebianOnly
-source /src/upscaleenvdocker.sh 
-mkdir -p /home/chrome/Downloads
 ```
-
-```commandsDebianOnly
-curl --user "$MY_GITHUB_USERNAME:$MY_GITHUB_TOKEN" -X POST https://api.github.com/user/repos -d '{"name": "preflightCheck'"$NOW"'", "public": "true"}'
-mkdir -p $MY_HOME_DIRECTORY/preflightCheck
-pushd $MY_HOME_DIRECTORY/preflightCheck
-rm -rf .git
-echo "# preflightCheck" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://${MY_GITHUB_USERNAME}:${MY_GITHUB_TOKEN}@github.com/${MY_GITHUB_USERNAME}/preflightCheck${NOW}.git
-git push -u origin main
-mkdir -p MY_DOWNLOAD_FOLDER
-pushd MY_DOWNLOAD_FOLDER
-rm -f *
-popd
-popd
-
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
-cp MY_DOWNLOAD_FOLDER/node-v16.13.1.pkg .
-
-
-
-``` 
-
-
-``` 
 
 Create an Angular app and within that an Angular library:
 ```commands
@@ -64,12 +38,12 @@ popd
 
 ```
 
-Download the latest Upscale PWA Libraries:
+Download the latest Upscale PWA Libraries from he Upscale Workbench:
 ```clickpath:download_PWA
 YourUpscaleWorkbenchURL -> Consumer Applications -> PWA -> Edit application configuration -> Save & download project
 ```
 
-Copy the downloaded libs into your Angular app:, which include a thin client SDK, that the PWA uses to access APIs, and the web storefront SDK.
+Copy the downloaded libs into your Angular app, which include a thin client SDK, that the PWA uses to access APIs, and the web storefront SDK.
 
 ```commands
 cp $MY_DOWNLOAD_FOLDER/application-pwa.zip $MY_HOME_DIRECTORY
@@ -81,7 +55,7 @@ npm install --save-dev ./libs/upscale-service-client-angular-0.10*.tgz
 npm install --save-dev ./libs/upscale-web-storefront-sdk-0.0.1-BETA.*.tgz 
 ```
 
-Adjust the compilation rights:
+Reduce the compilation requiremetns to avoid compilation errors:
 
 ```commands
 sed -i -e 's/"inlineSources": true,/"inlineSources": true, "strictNullChecks":false,"noImplicitAny":false,/g' projects/my-first-native-extension/tsconfig.lib.json 
@@ -93,7 +67,7 @@ curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main
 curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/materialTemp/my-first-native-extension.module.ts > projects/my-first-native-extension/src/lib/my-first-native-extension.module.ts
 ``` 
  
-Build and package - !!we should not need npm install --save form-data, but seems necessary on linux?
+Build and package:
 
 ```commands 
 npm install --save form-data
@@ -101,7 +75,7 @@ ng build --configuration production
 npm pack ./dist/my-first-native-extension
 ``` 
 
-Check into github
+Check into github:
 
 ```commands 
 curl --user "$MY_GITHUB_USERNAME:$MY_GITHUB_TOKEN" -X POST https://api.github.com/user/repos -d '{"name": "my-first-native-extension'"$NOW"'", "public": "true"}'
@@ -114,7 +88,8 @@ git remote add origin https://${MY_GITHUB_USERNAME}:${MY_GITHUB_TOKEN}@github.co
 git push -u origin main
 ``` 
 
-Add an Upscale extension and then add to an experience
+Add an Upscale extension and then add to an experience:
+
 ```clickpath:CreateExtensionAndExperience
 YourUpscaleWorkbenchURL -> Advanced Settings -> Extensions -> + -> PWA Native Extension (beta) ->
   Extension name=my-first-native-extension${NOW}
@@ -129,7 +104,7 @@ YourUpscaleWorkbenchURL -> Experiences -> Coffeefy Mobile Commerce Experience ->
   -> Save
 ``` 
 
-Remove the previousy downloaded PWA 
+Remove the previousy downloaded PWA:
 
 ```commands
 pushd $MY_DOWNLOAD_FOLDER
@@ -146,7 +121,7 @@ Extensions=NG Coffeefy styling, MyFirstExtension${NOW}
 -> Save & download project
 ``` 
 
-Compile and run your new PWA
+Compile and run your new PWA:
 ```commands 
 pushd $MY_DOWNLOAD_FOLDER
 unzip -o application-pwa.zip 
@@ -154,24 +129,11 @@ cd caas2-webapp
 npm install 
 npm start
 ``` 
-Access your site and confirm the stick man is there.
-http://localhost:4200/
+Access your site at http://localhost:4200/ and confirm the stick man is there.
 
 ```clickpath:ConfirmLittleStickman
 localhost:4200 -> Account -> confirmYouSeeYourLittleStickMan :)
 ``` 
-
-# To test this journey automatically:
-To verify:
-- Download and then personalise upscaleenv.sh as described in prerequisites.
-- ConsumerApplication Extensions should have just NG Coffeefy styling
-- ConsumerApplication Link Experience should be Coffeefy Mobile Commerce Experience
-- Coffeefy Mobile Commerce Experience Account should have no custom component
-- remove any previously downloaded pwa zips from your download folder (as they will cause renaming of more recent downloads)
-- git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
-- cd UpscaleJourneySelfTesting
-- mvn clean
-- mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
 
 # Lessons Learned 
 - Design UIs to be easy to use but ALSO easy to test. That means
@@ -179,26 +141,20 @@ To verify:
 
 
 # To run in Docker
-
 See Docs at https://github.com/karatelabs/karate/wiki/Docker
-```
 
+```
 cp ~/upscaleenv.sh  ./upscaleenvdocker.sh 
 vi ./upscaleenvdocker.sh 
+
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
 
 open vnc://localhost:5900
+
 docker exec -it -w /src karate bash
+mkdir -p /home/chrome/Downloads
 source upscaleenvdocker.sh 
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 cd UpscaleJourneySelfTesting
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
-or
-mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
-
-mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD}
-cp /tmp/karate.mp4 src
-
-docker cp karate:/tmp .
-
 ```
