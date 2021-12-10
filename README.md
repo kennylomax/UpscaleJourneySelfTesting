@@ -1,8 +1,8 @@
 # About this
 
 - This Upscale Journey is based on [Adriaan's Upscale Demo](https://performancemanager.successfactors.eu/sf/learning?destUrl=https%3a%2f%2fsaplearninghub%2eplateau%2ecom%2flearning%2fuser%2fdeeplink%5fredirect%2ejsp%3flinkId%3dONLINE%5fCONTENT%5fSTRUCTURE%26componentID%3dPSD%5fWEB%5f20955%5fEN%26componentTypeID%3dEXPERT%5fLED%26revisionDate%3d1631693160000%26fromSF%3dY&company=learninghub) .
-- It is written in a format that allows us to test the journey itself end-to-end on a mac or docker including the commandline commands, and clickpaths.
-- The plan is to have a series of journeys that are self-testable, and serve as tutorials, demos and end-to-end tests for inclusion in CICD pipelines.
+- It is written in a format that allows us to automatically run and valdiate its contents on a mac or docker *including the commandline commands, and clickpaths*
+- The proposal is to have a series of these self-validating journeys, to  serve as *tutorials*, *demos*, and also as *end-to-end tests* for inclusion in CICD pipelines.
 - The journey can be run in Docker (instructions at the bottom) to a) validate it, b) create videos of the click paths for inclusion in the journey doc.
 
 # Tested on Mac and Docker.
