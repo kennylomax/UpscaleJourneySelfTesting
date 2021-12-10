@@ -1,7 +1,5 @@
 # About this
 
-![a nice image](https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/karate_DownloadNewPWA.gif)
-
 - This Upscale Journey is based on [Adriaan's Upscale Demo](https://performancemanager.successfactors.eu/sf/learning?destUrl=https%3a%2f%2fsaplearninghub%2eplateau%2ecom%2flearning%2fuser%2fdeeplink%5fredirect%2ejsp%3flinkId%3dONLINE%5fCONTENT%5fSTRUCTURE%26componentID%3dPSD%5fWEB%5f20955%5fEN%26componentTypeID%3dEXPERT%5fLED%26revisionDate%3d1631693160000%26fromSF%3dY&company=learninghub) .
 - It is written in a format that allows us to automatically run and valdiate its contents on a mac or docker *including the commandline commands, and clickpaths*
 - The proposal is to have a series of these self-validating journeys, to  serve as *tutorials*, *demos*, and also as *end-to-end tests* for inclusion in CICD pipelines.
@@ -44,9 +42,6 @@ Download the latest Upscale PWA Libraries from he Upscale Workbench:
 ```clickpath:download_PWA
 YourUpscaleWorkbenchURL -> Consumer Applications -> PWA -> Edit application configuration -> Save & download project
 ```
-
-![some vid](https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/.github/images/karate_DownloadNewPWA.mp4)
-
 https://user-images.githubusercontent.com/6401254/145571115-dbd3aa00-91a2-4e76-84a6-8926584717be.mp4
 
 
