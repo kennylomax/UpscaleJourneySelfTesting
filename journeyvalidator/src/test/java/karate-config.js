@@ -15,8 +15,6 @@ function fn() {
             type: 'chrome',
             showDriverLog: true,
             start: false,
-            highlight: true,
-            highlightDuration: 3000,
             beforeStart: 'supervisorctl start ffmpeg',
             afterStop: 'supervisorctl stop ffmpeg',
             videoFile: 'ls /tmp/karate.mp4'
