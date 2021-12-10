@@ -1,6 +1,6 @@
 # About this
 
-![a nice image](https://user-images.githubusercontent.com/6401254/145583040-db7c811d-2b14-4a1a-81a6-5dc90f8fb6ed.png)
+![a nice image](https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/karate_DownloadNewPWA.gif)
 
 - This Upscale Journey is based on [Adriaan's Upscale Demo](https://performancemanager.successfactors.eu/sf/learning?destUrl=https%3a%2f%2fsaplearninghub%2eplateau%2ecom%2flearning%2fuser%2fdeeplink%5fredirect%2ejsp%3flinkId%3dONLINE%5fCONTENT%5fSTRUCTURE%26componentID%3dPSD%5fWEB%5f20955%5fEN%26componentTypeID%3dEXPERT%5fLED%26revisionDate%3d1631693160000%26fromSF%3dY&company=learninghub) .
 - It is written in a format that allows us to automatically run and valdiate its contents on a mac or docker *including the commandline commands, and clickpaths*
