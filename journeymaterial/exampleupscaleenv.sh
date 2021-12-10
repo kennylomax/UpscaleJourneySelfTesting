@@ -19,20 +19,18 @@ export MY_HOME_DIRECTORY_PREFIX=Absolute folder location where this journey shou
 #Leave these alone
 export MY_HOME_DIRECTORY=${MY_HOME_DIRECTORY_PREFIX}/${NOW}
 export NOW=$( date '+%s000' )
+git config --global user.name "$MY_GITHUB_USERNAME"
+git config --global user.password "$MY_GITHUB_TOKEN"
 if [[ "$OSTYPE" == *"darwin"* ]]; then
-  export RUNNING_ON_MAC=true
   brew update
   brew install node
   npm install -g @angular/cli@12.2.10
   ng analytics off
 else 
   # Linux for Docker
-  export RUNNING_ON_MAC=false
   apt-get update    
   # See https://linuxize.com/post/how-to-install-node-js-on-debian-10/
   curl -sL https://deb.nodesource.com/setup_12.x |  bash -
   apt-get install -y nodejs
   echo N | /usr/bin/npm install -g @angular/cli@12.2.10
-  git config --global user.email $MY_GITHUB_USERNAME
-  git config --global user.name $MY_GITHUB_TOKEN
 fi
