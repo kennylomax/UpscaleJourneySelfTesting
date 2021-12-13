@@ -1,4 +1,4 @@
-docker exec -it -w /src karate bash
+#!/bin/bash 
 mkdir -p /home/chrome/Downloads
 chmod 777 /home; chmod 777 /home/chrome; chmod 777 /home/chrome/Downloads 
 source ~/upscaleenvdocker.sh 

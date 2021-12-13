@@ -5,13 +5,7 @@
 - The proposal is to have a series of these self-validating journeys, to  serve as *tutorials*, *demos*, and also as *end-to-end tests* for inclusion in CICD pipelines.
 - The journey can be run in Docker (instructions at the bottom) to a) validate it, b) create videos of the click paths for inclusion in the journey doc.
 
-
-
-
-
-
 https://user-images.githubusercontent.com/6401254/145590018-ab3bd68c-4ba3-45e2-8e2e-cd50103980e6.mp4
-
 
 
 # Tested on Mac and Docker.
@@ -23,6 +17,7 @@ https://github.com/kennylomax/UpscaleJourneySelfTesting/blob/main/README.md
 Fetch the file upscaleenv.sh:
 ``` 
 curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/journeymaterial/exampleupscaleenv.sh > ~/upscaleenv.sh 
+chmod 700 ~/upscaleenv.sh 
 ```
 .. and personlize the contents.
 
@@ -164,15 +159,24 @@ open vnc://localhost:5900
 cp ~/upscaleenv.sh  ~/upscaleenvdocker.sh 
 vi ~/upscaleenvdocker.sh 
 
-docker run -d --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome 
+cp ~/upscaleenvdocker.sh  .
+docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome 
+
 
 docker exec -it -w /src karate bash
+# docker exec -it -w /src karate ./validate.sh
+
 mkdir -p /home/chrome/Downloads
 chmod 777 /home; chmod 777 /home/chrome; chmod 777 /home/chrome/Downloads 
-source ~/upscaleenvdocker.sh 
+source ./upscaleenvdocker.sh 
 rm -rf UpscaleJourneySelfTesting
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 cd UpscaleJourneySelfTesting/journeyvalidator
 mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
 # mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
+# curl https://raw.githubusercontent.com/kennylomax/UpscaleJourneySelfTesting/main/journeyvalidator/validate.sh > ~/validate.sh 
+# chmod 700 ~/validate.sh 
+# ~/validate.sh 
+```
+# cp ~/validate.sh  .
