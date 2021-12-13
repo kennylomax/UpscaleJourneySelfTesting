@@ -1,6 +1,6 @@
 # About this
 
-- This Upscale Journey is based on [Adriaan's Upscale Demo](https://performancemanager.successfactors.eu/sf/learning?destUrl=https%3a%2f%2fsaplearninghub%2eplateau%2ecom%2flearning%2fuser%2fdeeplink%5fredirect%2ejsp%3flinkId%3dONLINE%5fCONTENT%5fSTRUCTURE%26componentID%3dPSD%5fWEB%5f20955%5fEN%26componentTypeID%3dEXPERT%5fLED%26revisionDate%3d1631693160000%26fromSF%3dY&company=learninghub) .
+- This Upscale Journey is based on [Adriaan's Upscale Demo](https://performancemanager.successfactors.eu/sf/learning?destUrl=https%3a%2f%2fsaplearninghub%2eplateau%2ecom%2flearning%2fuser%2fdeeplink%5fredirect%2ejsp%3flinkId%3dONLINE%5fCONTENT%5fSTRUCTURE%26componentID%3dPSD%5fWEB%5f20955%5fEN%26componentTypeID%3dEXPERT%5fLED%26revisionDate%3d1631693160000%26fromSF%3dY&company=learninghub).
 - It is written in a format that allows us to automatically run and valdiate its contents on a mac or docker *including the commandline commands, and clickpaths*
 - The proposal is to have a series of these self-validating journeys, to  serve as *tutorials*, *demos*, and also as *end-to-end tests* for inclusion in CICD pipelines.
 - The journey can be run in Docker (instructions at the bottom) to a) validate it, b) create videos of the click paths for inclusion in the journey doc.
@@ -147,28 +147,24 @@ https://user-images.githubusercontent.com/6401254/145590014-d3e3a5f6-bdfc-4d1c-b
 - Design UIs to be easy to use but ALSO easy to test. That means
 - having unique text in the text fields, avoiding (unless good reason) fancy dropdowns and popups). 
 
-# To run in OSX
-- cd journeyvalidator
-- mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=true
+# To run validator in OSX
+- git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
+- cd UpscaleJourneySelfTesting/journeyvalidator
+- personalize then source your upscaleenv.sh script: source ~/upscaleenv.sh 
+- start the tests: mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=true
 
-# To run in Docker
-See Docs at https://github.com/karatelabs/karate/wiki/Docker
+# To run validator in Docker
+- personalize then source your upscaleenv.sh script: source ~/upscaleenv.sh 
+- open vnc://localhost:5900
 
-open vnc://localhost:5900
-
-cp ~/upscaleenv.sh  ~/upscaleenvdocker.sh 
-vi ~/upscaleenvdocker.sh 
-
-cp ~/upscaleenvdocker.sh  .
+cp ~/upscaleenv.sh  .
 docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome 
-
-
 docker exec -it -w /src karate bash
 # docker exec -it -w /src karate ./validate.sh
 
 mkdir -p /home/chrome/Downloads
 chmod 777 /home; chmod 777 /home/chrome; chmod 777 /home/chrome/Downloads 
-source ./upscaleenvdocker.sh 
+source ./upscaleenv.sh 
 rm -rf UpscaleJourneySelfTesting
 git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
 cd UpscaleJourneySelfTesting/journeyvalidator
