@@ -155,12 +155,14 @@ See Docs at https://github.com/karatelabs/karate/wiki/Docker
 
 - cp ~/upscaleenv.sh  ./upscaleenvdocker.sh 
 - vi ./upscaleenvdocker.sh 
-- docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome
+- docker run --name karate --rm -p 5900:5900 --cap-add=SYS_ADMIN -v "$PWD":/src ptrthomas/karate-chrome 
 - open vnc://localhost:5900
 - docker exec -it -w /src karate bash
 - mkdir -p /home/chrome/Downloads
 - source upscaleenvdocker.sh 
 - git clone https://github.com/kennylomax/UpscaleJourneySelfTesting
-- cd UpscaleJourneySelfTesting
+- cd UpscaleJourneySelfTesting/journeyvalidator
 - mvn test -Dtest=UpscaleTest#runThruTutorial -DPath=${PWD} -DRunningOnMac=false
+- or
+- mvn clean test -DargLine='-Dkarate.env=docker -Dkarate.options="--tags @preflightChecks"' -Dtest=\!UpscaleTest#runThruTutorial  -Dtest=WebRunner
 
