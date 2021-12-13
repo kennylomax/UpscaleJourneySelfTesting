@@ -11,8 +11,7 @@ Scenario: preflightChecks
   * driver "https://nodejs.org/en/download/"
   * watchFor( '{a}64-bit / ARM64')
   * delay(delays)
-  * watchInput('body', Key.ESCAPE)
-  * delay(delays)
+  * waitFor( '{a}64-bit / ARM64')
 
 @logvariables
 Scenario: logvariables
